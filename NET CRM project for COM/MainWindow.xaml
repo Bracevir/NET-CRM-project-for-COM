@@ -1,0 +1,69 @@
+﻿<Window x:Class="CRMproject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CNC Tracking System" Height="450" Width="800">
+    <Window.Resources>
+        <ContextMenu x:Key="GridContextMenu">
+            <MenuItem Header="Edit Order" Click="EditOrder_Click"/>
+            <MenuItem Header="Delete Order" Click="DeleteOrder_Click"/>
+            <MenuItem Header="View Details" Click="ViewDetails_Click"/>
+        </ContextMenu>
+        <Style TargetType="ListView">
+            <Setter Property="Margin" Value="0,30,0,0"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#F5F5F5"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" >
+            <MenuItem Header="_Файл">
+                <MenuItem Header="_Добавить заказ" Click="AddOrderButton_Click"/>
+                <MenuItem Header="_Экспорт в CSV" Click="ExportToCsv_Click"/>
+                <MenuItem Header="_Импорт из CSV" Click="ImportFromCsv_Click"/>
+                <MenuItem Header="_Отчёт..." Click="PrintReport_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Поиск">
+                <MenuItem Header="_Фильтр заказов" Click="OpenSearchFilterWindow_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Помощь">
+                <MenuItem Header="_About" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+            <ToolBar DockPanel.Dock="Top" Visibility="Visible" Height="27" >
+                <Button x:Name="AddOrderButton" Click="AddOrderButton_Click" ToolTip="Добавить новый заказ">
+                    <Image Source="Images/add.png" />
+                </Button>
+                <Button x:Name="EditOrderButton" Click="EditOrder_Click">
+                    <Image Source="Images/edit.png" />
+                </Button>
+                <Button x:Name="DeleteOrderButton" Click="DeleteOrder_Click">
+                    <Image Source="Images/delete.png" />
+                </Button>
+                <!-- Добавьте другие кнопки по мере необходимости -->
+                <Button x:Name="ExportToCsvButton" Click="ExportToCsv_Click">
+                    <Image Source="Images/export.png"/>
+                </Button>
+                <Button x:Name="ImportFromCsvButton" Click="ImportFromCsv_Click">
+                    <Image Source="Images/import.png" />
+                </Button>
+                <Button x:Name="OpenCamWindow" Click="OpenCamWindow_Click">
+                    <Image Source="Images/3dprint.png" Stretch="UniformToFill" />
+                </Button>
+            </ToolBar>
+            <ListView x:Name="OrdersListView" MouseDoubleClick="OrdersListView_MouseDoubleClick" MouseRightButtonDown="OrdersListView_MouseRightButtonDown" Margin="0,0,0,0" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Префикс" DisplayMemberBinding="{Binding Prefix}" Width="100"/>
+                        <GridViewColumn Header="Стоимость заказа" DisplayMemberBinding="{Binding TotalCost}" Width="100"/>
+                        <GridViewColumn Header="Время заказа" DisplayMemberBinding="{Binding TotalETE}" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <!-- Другие элементы интерфейса -->
+        </DockPanel>
+    </Grid>
+</Window>

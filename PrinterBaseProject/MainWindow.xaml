@@ -1,0 +1,106 @@
+﻿<Window x:Class="PrinterBaseProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:PrinterBaseProject.Models" 
+    mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewModel:TemperatureViewModel, IsDesignTimeCreatable=True}" 
+        Title="3D Printer Control" Height="508" Width="600">
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Text="Управление 3D-принтером" FontSize="24" Margin="0,0,0,20"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="COM-порт:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <ComboBox x:Name="ComPortComboBox" Width="100" SelectedIndex="0" SelectionChanged="ComPortComboBox_SelectionChanged"/>
+                <Button Content="Обновить порты" Width="100" Click="RefreshComPorts_Click"/>
+            </StackPanel>
+
+            <TextBlock Text="Температура экструдерa:"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="ExtruderTemperatureSlider" Minimum="0" Maximum="270" Value="200"
+                        TickFrequency="10" IsSnapToTickEnabled="True" ValueChanged="ExtruderTemperatureSlider_ValueChanged" Width="554"/>
+                <TextBlock x:Name="ExtruderTemperatureValue" Width="50"
+                           Text="{Binding ElementName=ExtruderTemperatureSlider, Path=Value, StringFormat={}{0:F0}}"/>
+            </StackPanel>
+            <Button Content="Установить температуру экструдерa" Click="SetExtruderTemperature_Click"/>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Настраиваемая температура экструдерa:" Width="229"/>
+                <TextBlock x:Name="CurrentExtruderTemperature" FontWeight="Bold"
+                           Text="{Binding ElementName=ExtruderTemperatureValue, Path=Text}" Width="24"/>
+                <TextBlock Text="Текущая температура экструдерa:" Width="191"/>
+                <TextBlock x:Name="RealExtruderTemperature" FontWeight="Bold" Text="{Binding RealExtruderTemperature}"/>
+            </StackPanel>
+
+            <TextBlock Text="Температура стола:"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="BedTemperatureSlider" Minimum="0" Maximum="120" Value="60"
+                        TickFrequency="10" IsSnapToTickEnabled="True" ValueChanged="BedTemperatureSlider_ValueChanged" Width="555"/>
+                <TextBlock x:Name="BedTemperatureValue" Width="50"
+                           Text="{Binding ElementName=BedTemperatureSlider, Path=Value, StringFormat={}{0:F0}}"/>
+            </StackPanel>
+            <Button Content="Установить температуру стола" Click="SetBedTemperature_Click"/>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Настраиваемая температура стола:" Width="203"/>
+                <TextBlock x:Name="CurrentBedTemperature" FontWeight="Bold"
+                           Text="{Binding ElementName=BedTemperatureValue, Path=Text}"/>
+            </StackPanel>
+
+            <!-- Реальные температуры -->
+            <TextBlock Text="Текущая температура стола:"/>
+            <TextBlock x:Name="RealBedTemperature" FontWeight="Bold" Text="{Binding RealBedTemperature}" />
+
+            <TextBlock Text="Скорость печати:"/>
+            <Slider x:Name="PrintSpeedSlider" Minimum="10" Maximum="300" Value="50"
+                    TickFrequency="10" IsSnapToTickEnabled="True"/>
+
+            <StackPanel Orientation = "Horizontal" Margin = "0,10,0,0">
+                <Button x:Name = "PauseButton" Content = "Пауза" Width ="100 " Click = "PauseButton_Click"/>
+                <Button x:Name = "SendGCodeButton" Content = "Отправить GCODE" Width = "150"
+                        Click = "SendGCodeButton_Click"/>
+            </StackPanel>
+
+            <TextBlock Text = "Управление осями:" Margin = " 0,20,0,0 "/>
+            <StackPanel Orientation = " Horizontal ">
+                <Button x:Name = "MoveXPlus" Content = "X+" Width = "50"
+                        Click = "MoveXPlus_Click"/>
+                <Button x:Name = "MoveXMinus" Content = "X-" Width = "50"
+                        Click = "MoveXMinus_Click"/>
+                <Button x:Name = "MoveYPlus" Content = "Y+" Width = "50"
+                        Click = "MoveYPlus_Click"/>
+                <Button x:Name = "MoveYMinus" Content = "Y-" Width = "50"
+                        Click = "MoveYMinus_Click"/>
+                <Button x:Name = "MoveZPlus"
+                        Content = "Z+"
+                        Width = "50"
+                        Click = "MoveZPlus_Click"/>
+                <Button x:Name = "MoveZMinus"
+                        Content = "Z-"
+                        Width = "50"
+                        Click = "MoveZMinus_Click"/>
+            </StackPanel>
+
+            <StackPanel Orientation = "Horizontal"
+                         Margin = "0,10,0,0">
+                <Button x:Name = "HomeXYZButton"
+                        Content = "Парковка X Y Z"
+                        Width = "150"
+                        Click = "HomeXYZButton_Click"/>
+                <TextBox x:Name = "MaxXTextBox"
+                          Width = "50"
+                          TextAlignment = "Center"/>
+                <TextBox x:Name = "MaxYTextBox"
+                          Width= "50 "
+                          TextAlignment= "Center"/>
+                <TextBox x:Name= "MaxZTextBox"
+                          Width= "50"
+                          TextAlignment= "Center"/>
+                
+            </StackPanel>
+            <TextBlock Text="ETE:"/>
+        </StackPanel>
+    </Grid>
+</Window>

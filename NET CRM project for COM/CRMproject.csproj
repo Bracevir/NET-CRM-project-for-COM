@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>NET_CRM_project_for_COM</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\3dprint.png" />
+    <None Remove="Images\add.png" />
+    <None Remove="Images\delete.png" />
+    <None Remove="Images\edit.png" />
+    <None Remove="Images\export.png" />
+    <None Remove="Images\import.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\3dprint.png" />
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\delete.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\edit.png" />
+    <Resource Include="Images\export.png" />
+    <Resource Include="Images\import.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\NET WPF 3d printer base project\NET WPF 3d printer base project\PrinterBaseProject.csproj" />
+  </ItemGroup>
+
+</Project>
