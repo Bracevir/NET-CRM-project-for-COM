@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\NET WPF 3d printer base project\NET WPF 3d printer base project\PrinterBaseProject.csproj" />
+    <ProjectReference Include="..\PrinterBaseProject\PrinterBaseProject.csproj" />
   </ItemGroup>
 
 </Project>
